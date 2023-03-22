@@ -1,0 +1,62 @@
+#Our finalized version of the 8 ball sim. Enjoy and have fun because we sure did!
+
+import random
+import time
+from textblob import TextBlob
+
+def get_sentiment(question):
+    blob = TextBlob(question)
+    return blob.sentiment.polarity
+
+def magic_8_ball():
+    answers = [
+        "It is certain.",
+        "It is decidedly so.",
+        "That's crazy" ,
+        "Without a doubt.",
+        "Yes - definitely.",
+        "You may rely on it.",
+        "As I see it, yes.",
+        "Most likely.",
+        "Just because you seem so nice, of course 👍)" ,
+        "Outlook good.",
+        "Yes.",
+        "Signs point to yes.",
+        "Try again abd perhaps eat a snack first so you can be well fed as well.",
+        "Ask again later.",
+        "Better not tell you now.",
+        "Cannot predict now.",
+        "Concentrate and ask again.",
+        "Don't count on it.",
+        "Outlook not so good.",
+        "My sources say no.",
+        "Very doubtful." ,
+        "Oh no!" ,
+        "Hmm, I mean I cannot see why I would say no 👍" ,
+        "👍" ,
+        "I'm truly sorry...just kidding! Of course. 👁️👁️" ,
+        "Haha please, can you just wait five minutes, you are absolutely glowing!"
+        
+    ]
+
+    question = input(" Please ask me anything regarding a yes or no to me, the magic 8 ball, and I will do my best to assist you ;): ")
+    sentiment = get_sentiment(question)
+
+    if sentiment < -0.5:
+        print("That's not the nicest question to ask, I'm sorry if you're feeling a bit down, but I also cannot provide you an answer and instead want to say that you do matter to me.")
+        return
+    elif sentiment < 0:
+        print("That's not a positive question. Here's your answer, but it is not the best to hear at this very moment, given what you asked:")
+    elif sentiment > 0.5:
+        print("That's a really nice question, it seems like you are in a good mood. Here's your answer, I am sure this is what you want to hear right now too:")
+    elif sentiment > 0:
+        print("That's a positive question user, thank you for spreading positivity and not negativity. Here's your answer and I hope you continue to have an amazing day:")
+
+    time.sleep(2)
+    print(random.choice(answers))
+
+while True:
+    magic_8_ball()
+    play_again = input("Do you want to play again? (Y/N) ")
+    if play_again.upper() != "Y":
+        break
